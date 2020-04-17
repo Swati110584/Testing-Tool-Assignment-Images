@@ -1,0 +1,509 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>Testing Tool Testim</title><link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none 0s ease 0s; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+svg[id^="mermaidChart"] { line-height: 1em; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    padding-bottom: .3em;
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+   padding-bottom: .3em;
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border-top: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table tr th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr th:first-child,
+table tr td:first-child {
+    margin-top: 0;
+}
+table tr th:last-child,
+table tr td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+.html-for-mac .context-menu {
+    --item-hover-bg-color: #E6F0FE;
+}
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+
+</style>
+</head>
+<body class='typora-export os-windows' >
+<div  id='write'  class = 'is-node'><p><em><span>*</span><span>Part 1. Automated testing tool</span><span>*</span></em></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\Logo.PNG" referrerpolicy="no-referrer" alt="Logo"></p><p><span>Q1.1 Describe your automated testing tool based on the rubric and detailed</span><br/><span>questions developed by the class. This should describe the type of testing tool</span><br/><span>it is, what is its main characteristics, how it is being developed and</span><br/><span>maintained, which type of models and information is based on etc. Write down</span><br/><span>your answers that describe (as well as links) to the tool. </span></p><p><span>Ans:- </span><strong><span>*</span><span>*</span><span>Testim (</span><span>*</span><span>*</span></strong><span>&lt;</span><a href='https://www.testim.io/' target='_blank' class='url'>https://www.testim.io/</a><span>&gt;</span><strong><span>*</span><span>*</span><span>)</span><span>*</span><span>*</span></strong><span> is detailed as &quot;</span><span>*</span><span>Artificial</span><br/><span>intelligence based test automation</span><span>*</span><span>&quot;. It uses artificial intelligence to</span><br/><span>speed-up the authoring, execution, and maintenance of automated tests.</span></p><p><strong><span>*</span><span>*</span><span>Testim</span><span>*</span><span>*</span></strong><span> is the fastest way to resilient end-to-end tests, in code, codeless,</span><br/><span>or both.</span></p><p><strong><span>*</span><span>*</span><span>Testim.io</span><span>*</span><span>*</span></strong><span> is a test automation tool that doesn’t require coding. Anyone can</span><br/><span>create tests, save them, and execute them again at any time. Re-use tests as</span><br/><span>regression as you progress through the agile workflow.</span></p><p><span>Testim.io is a tool which can also be considered as a platform that includes</span><br/><span>almost all the prime factors like Authoring &amp; Execution, maintenance,</span><br/><span>troubleshoot, reporting, etc., of automated tests. Considering the concept of</span><br/><span>Dynamic locators, it focusses on testing types like functional testing,</span><br/><span>end-to-end testing, and UI testing.</span></p><p><span>It increases the protractile and constancy of test suites. And also gives the</span><br/><span>teams and the organizations, the resilience to develop the functionalities of</span><br/><span>the platform using complex programming logic with JavaScript and HTML.</span></p><p><strong><span>*</span><span>*</span><span>Testim</span><span>*</span><span>*</span></strong><span> is </span><strong><span>*</span><span>*</span><span>&quot;Browser Testing&quot;</span><span>*</span><span>*</span></strong><span>.</span></p><p><a href='http://testim.io/'><span>Testim.io</span></a><span> alleviates the automation scripts depending on</span><br/><span>the changes that the applications go through. This effectively removes the</span><br/><span>flakiness of the automation suites.</span></p><p><strong><span>*</span><span>*</span><span>Testim</span><span>*</span><span>*</span></strong><span> is a modern day automated testing tool. It uses machine learning to</span><br/><span>speed the authoring, execution, and maintenance of automated tests. The tester</span><br/><span>can scrutinize any test case in few minutes and execute them on multiple web and</span><br/><span>mobile platforms.</span></p><p><strong><span>*</span><span>*</span><span>Key Features of Testim:</span><span>*</span><span>*</span></strong></p><p><span>● Easily add annotations to find out what&#39;s wrong in the system.  </span><br/><span>● Developers just need to click the automated bug test to reproduce in the</span><br/><span>browser automatically.  </span><br/><span>● Quickly view and share easy-to-understand annotated screenshots using the bug</span><br/><span>tracker.  </span><br/><span>● It uses machine learning to speed the authoring, execution, and maintenance of</span><br/><span>automated tests.</span></p><p><span>● It can be easily integrated with different CI/CD tools.</span></p><p><strong><span>*</span><span>*</span><span>Testim</span><span>*</span><span>*</span></strong><span> uses Dynamic Locators, The Artificial Intelligence (AI) underneath</span><br/><span>the platform in real time which analyzes all the DOM objects of a page and</span><br/><span>extracts the objects and its properties. Here, the AI decides the best location</span><br/><span>strategy to locate a particular element based on this analysis. Due to this,</span><br/><span>even if a developer changes the attribute of an element, the test still</span><br/><span>continues to run and this leads to more stable tests. As a result, the authoring</span><br/><span>and execution of automated tests are much faster and more stable.</span></p><p><span>Testim is an end-to-end agile testing automation solution which utilizes machine</span><br/><span>learning for test authoring, execution, and maintenance. Users can create tests</span><br/><span>in minutes, run thousands of tests in parallel across different browsers,</span><br/><span>integrate with their existing CI/CD and collaboration tools, and more.</span></p><p><span>With Testim, users can create tests either by recording or by code, or utilize</span><br/><span>both in any combination. Test steps can be reused for any other tests users may</span><br/><span>be running. Thousands of parameters are analyzed for each element, with Testim</span><br/><span>weighing their overall reliability before ranking them accordingly. Tests can be</span><br/><span>run with different data sets and conditions, and full customization capabilities</span><br/><span>are offered, allowing users to run tests on different browsers, operating</span><br/><span>systems, starting URLs, and more. Visual validations, through native integration</span><br/><span>with Aplitools Eyes allow users to check pixels, fonts, and other visuals</span><br/><span>through a screenshot.</span></p><p><span>Testim enables the running of thousands of tests in parallel across multiple</span><br/><span>browsers to provide results in minutes. Tests can be run on-premise, on users’</span><br/><span>private clouds, or on the Testim cloud. Through integration with CI/CD systems,</span><br/><span>apps can be deployed automatically when all tests are passed, and feedback on</span><br/><span>issues can be relayed quickly to developers. All information for failed tests is</span><br/><span>accessible, and bugs can be reported to bug trackers with a single click. Video</span><br/><span>and screenshots of bugs can be captured, and users can add annotations to</span><br/><span>highlight what is wrong. Automated tests can also reproduce the bug locally in</span><br/><span>the browser for developers to view.</span></p><p><span>|</span><span> </span><strong><span>*</span><span>*</span><span>Testim Feature Summary</span><span>*</span><span>*</span></strong><span> </span><span>|</span><span>                                   </span><span>|</span><span></span><br/><span>|</span><span>----------------------------</span><span>|</span><span>-----------------------------------</span><span>|</span><span></span><br/><span>|</span><span> Parallel execution support </span><span>|</span><span> Annotations &amp; mark-ups            </span><span>|</span><span></span><br/><span>|</span><span> Test script reviews        </span><span>|</span><span> Branches                          </span><span>|</span><span></span><br/><span>|</span><span> Requirements-based testing </span><span>|</span><span> Local debugging                   </span><span>|</span><span></span><br/><span>|</span><span> Parameterized testing      </span><span>|</span><span> CI/CD connection                  </span><span>|</span><span></span><br/><span>|</span><span> Screenshot capture         </span><span>|</span><span> SDK (JAVA, JS, RUBY, PYTHON, C</span><span>\</span><span>#</span><span>) </span><span>|</span><span></span><br/><span>|</span><span> Webhooks                   </span><span>|</span><span> Export to code                    </span><span>|</span><span></span><br/><span>|</span><span> Steps to reproduce         </span><span>|</span><span> Test editor                       </span><span>|</span><span></span><br/><span>|</span><span> Auto-create tests          </span><span>|</span><span> Errors &amp; logs                     </span><span>|</span><span></span><br/><span>|</span><span> Drill down analysis        </span><span>|</span><span> Advanced reporting                </span><span>|</span><span></span><br/><span>|</span><span> Visual validation          </span><span>|</span><span> Video capture                     </span><span>|</span><span></span><br/><span>|</span><span> Test conditions            </span><span>|</span><span> Bug tracker                       </span><span>|</span><span></span><br/><span>|</span><span> Multiple Projects          </span><span>|</span><span>                                   </span><span>|</span></p><p><strong><span>*</span><span>*</span><span>How is this tool different from other tools?</span><span>*</span><span>*</span></strong></p><p><strong><span>*</span><span>*</span><span>The use of static ID’s.</span><span>*</span><span>*</span></strong></p><p><strong><span>*</span><span>*</span><span>For Example,</span><span>*</span><span>*</span></strong><span> a developer changes the ID name or some attribute of an element</span><br/><span>on the web page. The automated tests immediately break due to this change, as it</span><br/><span>is still referring to the old ID name. This leads to unstable tests and the</span><br/><span>testers have to spend a lot of time in maintaining them.</span></p><p><span>The introduction of the concept of </span><strong><span>*</span><span>*</span><span>Dynamic locators</span><span>*</span><span>*</span></strong><span> resolves it.</span><em><span>*</span><span> </span><span>*</span></em><span>The</span><br/><span>Artificial Intelligence (AI) underneath the platform in real time, analyzes all</span><br/><span>the DOM objects of a page and extracts the objects and its properties.</span></p><p><span>Finally, the AI decides the best location strategy to locate a particular</span><br/><span>element based on this analysis.</span></p><p><span>Due to this, even if a developer changes the attribute of an element, the test</span><br/><span>still continues to run and this leads to more stable tests. </span><em><span>*</span><span>*</span></em><span>As a result of</span><br/><span>this, authoring and execution of automated tests are much faster and more</span><br/><span>stable.</span><em><span>*</span><span>*</span></em></p><p><span>#</span><span>#</span><span>#</span><span> </span><span>*</span><span>Create tests your way</span><span>*</span></p><p><span>There are two ways to create tests in Testim — record them using the Testim</span><br/><span>Extension or code them in your IDE. Actually, there’s a third and recommended</span><br/><span>approach for those who want to code—record the test, export it as code and</span><br/><span>modify it in your IDE.</span></p><p><span>When you record a test, each UI action leverages our AI-based platform to</span><br/><span>analyze the DOM, weigh the attributes associated with an element and create</span><br/><span>Smart Locators that uniquely identify elements. If attributes such as the color,</span><br/><span>class, text or location of an element are changed by development, our AI will</span><br/><span>still be able to uniquely identify the element so that your test doesn’t fail.</span></p><p><span>Testim has many features built into the visual test editor to help you customize</span><br/><span>your tests such as validation of text, email, PDFs, or conditions and loops. You</span><br/><span>can also insert JavaScript into any step so that you can handle nearly</span><br/><span>any UI situation.</span></p><p><span>If you are into JavaScript, you can also export your test as code and customize,</span><br/><span>debug, or refactor it your IDE; the choice is yours.</span></p><p><span>When your tests are ready, you can run on-demand or schedule a test run within</span><br/><span>Testim. We also make it really easy to run your test following a CI action.</span><br/><span>Tests can be parallelized and across all browsers on our test cloud or any</span><br/><span>Selenium-compatible test cloud.</span></p><p><span>Regardless of how your tests were created (code or codeless) when they run, you</span><br/><span>will see the results in Testim so you can troubleshoot. If you find an</span><br/><span>application defect, our bug capture tool makes it really easy to create a bug</span><br/><span>report, complete with screenshots, video and the test steps to recreate it. Pop</span><br/><span>it into Jira or Trello to submit your report in minutes. Our reporting shows</span><br/><span>test run history, including managerial reports so you can show all of the great</span><br/><span>work you’ve been doing and that releases are ready to ship.</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\2.PNG" referrerpolicy="no-referrer"></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\3.PNG" referrerpolicy="no-referrer"></p><p><strong><span>*</span><span>*</span><span>What tools integrate with Testim?</span><span>*</span><span>*</span></strong></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\4.PNG" referrerpolicy="no-referrer"></p><h1><a name="testim-installation" class="md-header-anchor"></a><strong><span>*</span><span>*</span><span>Testim Installation</span><span>*</span><span>*</span></strong></h1><h1><a name="1testim-extension" class="md-header-anchor"></a><span>1.Testim Extension</span></h1><p><span>Go to the Chrome Web Store to download the</span><br/><span>extension </span><a href='https://chrome.google.com/webstore/detail/testim-editor/pebeiooilphfmbohdbhbomomkkoghoia'><span>here</span></a><span>.</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\5.PNG" referrerpolicy="no-referrer"></p><p><span>Click on the icon and then click on </span><strong><span>*</span><span>*</span><span>Login to start</span><span>*</span><span>*</span></strong><span>.</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\6.PNG" referrerpolicy="no-referrer"></p><p><span>Login</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\7.PNG" referrerpolicy="no-referrer"></p><p><span>Getting Started</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\8.PNG" referrerpolicy="no-referrer"></p><p><span>Recording Test</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\9.PNG" referrerpolicy="no-referrer"></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\10.PNG" referrerpolicy="no-referrer"></p><p><span>Test Assignment</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\11.PNG" referrerpolicy="no-referrer"></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\12.PNG" referrerpolicy="no-referrer"></p><p><span>Test Result</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\13.PNG" referrerpolicy="no-referrer"></p><p><span>To get more details, check out the below posts which give quick insights into</span><br/><span>Testim - </span></p><p><a href='https://testim.intercom-clicks.com/via/e?ob=1FtYvhcxsz5Uq9rV9LPP6ijwlG3T8oPv0vuVd4ickU0umtGw7gr2S8g38O9jJ6MuxMJyppRNCBia5Zw3m823FDFewx9dVwcm9BP0Csx38yAxWt6MvOLx17ReHx8%2BkOTZ&amp;h=447a616870f0f343b73ab1f4953cd935512d3c51-zlji8uj7_26514880413'><span>https://blog.testim.io/bringing-simplicity-to-authoring-and-execution-of-automated-tests/</span></a></p><p><a href='https://testim.intercom-clicks.com/via/e?ob=QxFlxgJqT76SPArtZ4bqbrf0wVFm3g8ju%2FwbzfblAindJq6Ddf%2FI52pZodUfXAuMmMOGLtJhl09JQq%2FlQ5CDb0UBFMQW%2F3qyFxYNa5b3gk5WAkoZawOrFjlpL7em07%2Fh&amp;h=08daef1f1cca5962213b78f4c06b657c28cef8d8-zlji8uj7_26514880413'><span>https://blog.testim.io/how-to-make-reusable-and-extensible-code-using-testim-io/</span></a></p><p><span>Q1.2 Give an example usage of your testing tool. You may give an example code,</span><br/><span>commands, or screenshots (if your tool is more graphical) to exemplify its use.</span><br/><span>You should also describe how the tool can be used and what kinds of situation or</span><br/><span>cases the tool can be applied?</span></p><p><span>Ans:-</span></p><p><span>Once we click on “Create test” it will ask to install the Testim extension for</span><br/><span>the Chrome browser:</span></p><p><span> </span></p><p><span> </span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\14.PNG" style="zoom:75%;" /></p><p><span>#</span><span>#</span><span>#</span><span> Test :-</span></p><p><span>Type “Calculator” on Chrome. Below window will be seen:-</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\15.PNG" style="zoom:75%;" /></p><p><span>Let’s build a test for “+” button. To do that, click on the Testim extension’s</span><br/><span>icon, as you can see in the following image:</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\16.PNG" style="zoom:75%;" /></p><p><span>That will open the following menu:</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\17.PNG" style="zoom:75%;" /></p><p><span>Check “CREATE AUTOMATED TEST.” Doing so will open Testim and attach the current</span><br/><span>tab to it. Then, go back to the calculator tab. There, you’ll see this:</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\18.PNG" style="zoom:75%;" /></p><p><span>Try application, and Testim will record your activities. We’ll create a test</span><br/><span>that verifies the “2 + 2” sum works as intended. Just perform the operation</span><br/><span>normally and, as soon as you’re done, go back to Testim, which should look like</span><br/><span>this:</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\19.PNG" style="zoom:75%;" /></p><p><span>Click on “SAVE” and, when asked, enter a name and description for your test:</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\20.PNG" style="zoom:75%;" /></p><p><span>Let’s run your recently created test. Click on the “Automate” button, located on</span><br/><span>Testim’s left panel:</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\21.PNG" style="zoom:75%;" /></p><p><span>You’ll see a test list containing only your newly created test:</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\22.PNG" style="zoom:75%;" /></p><p><span>Select the test, click on its “play” button, and it will run.</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\23.PNG" style="zoom:75%;" /></p><p><span>After clicking on the button, you’ll be warned not to touch the mouse and</span><br/><span>keyboard while the tests run:</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\24.PNG" style="zoom:75%;" /></p><p><span>Click on “OK.” The test will be run in a new Chrome tab, executing exactly what</span><br/><span>you’ve recorded. After the test finishes, the window will be closed. If you go</span><br/><span>back to the Testim tab, you should see the test’s result:</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\25.PNG" style="zoom:75%;" /></p><p><span>Bad news: it didn’t really test anything. Let’s see why and how to fix it.</span></p><p><span>#</span><span>#</span><span>#</span><span> Adding a Verification</span></p><p><span>The test you’ve just created lacks a verification. In other words, the test must</span><br/><span>verify whether two plus two is really four. Without that, it doesn’t test</span><br/><span>anything.</span></p><p><span>Click on the “Automate” button again, which will take you back to the test</span><br/><span>listing. Click on the test name so you can edit it:</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\26.PNG" style="zoom:75%;" /></p><p><span>Our test has six steps. We’re now adding an additional step—the validation.</span><br/><span>Click on the button with the “plus” sign, located just after the last step. This</span><br/><span>is what you’re going to see:</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\27.jpg" referrerpolicy="no-referrer"></p><p><span>Click on the “Validations” option (the one with the check sign), and you’ll see</span><br/><span>this:</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\28.jpg" style="zoom:Infinity%;" /></p><p><span>Then, click on “Validate element text.” You’ll be taken back to the calculator,</span><br/><span>where you should click on the result field:</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\29.PNG" style="zoom:75%;" /></p><p><span>Going back to Testim, you’ll see that the test has an extra step now:</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\30.PNG" style="zoom:75%;" /></p><p><span>Hover over the new step and click on the engine icon to show the properties:</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\31.png" style="zoom:67%;" /></p><p><span>Now it’s just a matter of editing the “Expected value” field, setting it to ‘4’.</span><br/><span>After doing that, click on the “SAVE” button again. You’ll see a box prompting</span><br/><span>you for a message explaining your change. Type “Add validation step” and click</span><br/><span>on OK:</span></p><p><span>Now you to have set the “Expected value” field to 4 and then click on “SAVE”</span><br/><span>again. When you’re prompted for a message, enter the “Add validation step.”</span></p><p><img src="C:\Users\naksh\Desktop\Testim\New folder (2)\32.PNG" style="zoom:75%;" /></p><p><span>We’re done adding a validation phase to our test. If we run it again, it will</span><br/><span>still pass. But this time, it’s going to be doing something useful, thanks to</span><br/><span>the verification step we’ve just added to it.</span></p></div>
+</body>
+</html>
